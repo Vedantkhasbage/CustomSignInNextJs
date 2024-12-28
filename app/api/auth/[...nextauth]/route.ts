@@ -1,7 +1,9 @@
 import  CredentialsProvider  from "next-auth/providers/credentials";
 import NextAuth from "next-auth";
 import GoogleProvider from "next-auth/providers/google";
-import GitlabProvider from "next-auth/providers/gitlab";
+import GitHubProvider from "next-auth/providers/github";
+import DiscordProvider from "next-auth/providers/discord";
+
 
 const handler=NextAuth({
     providers: [
@@ -12,8 +14,10 @@ const handler=NextAuth({
             password: { label: "Password", type: "password", placeholder:"12345" }
           },
           async authorize(credentials, req) {
-    
+            console.log("hello world");
+            
             console.log(credentials?.username)
+            console.log("hello world");
             console.log(credentials?.password)
               const user={
                 name:"vedant",
@@ -32,11 +36,25 @@ const handler=NextAuth({
             clientId: process.env.GOOGLE_CLIENT_ID as string,
             clientSecret: process.env.GOOGLE_CLIENT_SECRET as string
           }),
-          GitlabProvider({
-            clientId: "",
-            clientSecret: ""
+          GitHubProvider({
+            clientId: process.env.GITHUB_CLIENT_ID as string,
+            clientSecret: process.env.GITHUB_CLIENT_SECRET as string
+          }),
+          DiscordProvider({
+            clientId: process.env.DISCORD_CLIENT_ID as string,
+            clientSecret: process.env.DISCORD_CLIENT_SECRET as string
           })
       ],
+      callbacks: {
+        async signIn({ user, account, profile }) {
+            console.log("Sign-In Details:");
+            console.log("User:", user);
+            console.log("Account:", account);
+            console.log("Profile:", profile);
+
+            // Optional: You can add logic here to check if the user already exists in your database.
+            return true; // Allow sign-in
+        }},
      pages:{
         signIn:"/auth/signIn"
      },

@@ -22,7 +22,7 @@ export default function SignIn(){
     <img className="h-screen w-1/2" src="https://i.pinimg.com/originals/72/31/7f/72317fee23aff15f3c4cc72762dd86e4.jpg" alt="" />
       
       <div className="w-1/2 flex flex-col bg-white items-center justify-center ">
-            <div className="w-[420px] shadow-sm shadow-black h-[500px]">
+            <div className="w-[420px] h-[500px]">
                <div className="w-full text-center">
                <h1 className="text-semibold text-4xl text-black">Sign In</h1>
                </div>
@@ -49,10 +49,15 @@ export default function SignIn(){
                 </div>
 
                 <div className='cursor-pointer' onClick={()=>
-                    signIn("gitlab",{callbackUrl:"/"})}>
+                    signIn("github",{callbackUrl:"/"})}>
                 <img className='h-12' src="https://cdn-icons-png.flaticon.com/256/25/25231.png" alt="" />
                 </div>
                
+
+                <div className='cursor-pointer' onClick={()=>
+                    signIn("discord",{callbackUrl:"/"})}>
+                <img className='h-12' src="https://cdn-icons-png.flaticon.com/256/25/25231.png" alt="" />
+                </div>
              </div>
 
                 
